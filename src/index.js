@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Map from "./map";
-
+import ResturantsList from "./resturants";
+import "./index.css";
 class Location extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { lat: -32.5, lng: 72.5 };
+    this.state = { lat: 33.6844, lng: 73.0479, resturantsList: [] };
   }
   componentDidMount() {
     let success = position => {
@@ -21,19 +22,50 @@ class Location extends React.Component {
       console.log("Unable to retrieve your location");
     }
     navigator.geolocation.getCurrentPosition(success, error);
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url =
+      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=31.5204,74.3587&radius=1500&type=restaurant&key=AIzaSyC0FOtX3YbEpBiN5tqyVJQDvQaDJzA-N3g";
+
+    fetch(proxyurl + url)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            resturantsList: result.results
+          });
+          console.log(result.results);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {
+          // this.setState({
+          //   isLoaded: true,
+          //   error
+          // });
+          console.log("error");
+        }
+      );
   }
   render() {
     return (
-      <div>
-        <Map
-          isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKDrGe-sGHd2FERdA25ANVQDCZ5sd6Dsc&callback=initMap"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          lat={this.state.lat}
-          lng={this.state.lng}
-        />
+      <div className="container">
+        <div className="map">
+          <Map
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDmYOV6jyCwchqURbvPOnD5v7NoxUIR4r4"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `95vh` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            lat={this.state.lat}
+            lng={this.state.lng}
+            markers={this.state.resturantsList}
+          />
+        </div>
+        <div style={{ width: "30%" }} className="resturantList">
+          <ResturantsList resturants={this.state.resturantsList} />
+        </div>
       </div>
     );
   }
