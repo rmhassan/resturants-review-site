@@ -2,39 +2,62 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Map from "./map";
 import ResturantsList from "./resturants";
+import SearchInput from "./search";
+import Filter from "./filter";
 import "./index.css";
+import $ from "jquery";
+
 class Location extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { lat: 33.6844, lng: 73.0479, resturantsList: [] };
-  }
-  componentDidMount() {
-    let success = position => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      this.setState({
-        lat: latitude,
-        lng: longitude
-      });
+    this.state = {
+      lat: 33.6844,
+      lng: 73.0479,
+      resturantsList: [],
+      filter: {
+        rating: "1",
+        searchText: ""
+      }
     };
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+  }
 
-    function error() {
-      console.log("Unable to retrieve your location");
-    }
-    navigator.geolocation.getCurrentPosition(success, error);
+  componentDidMount() {
+    $.getJSON("../resturants.json", data => {
+      this.setState({
+        resturantsList: data
+      });
+    });
+    // let success = position => {
+    //   const latitude = position.coords.latitude;
+    //   const longitude = position.coords.longitude;
+    //   this.setState({
+    //     lat: latitude,
+    //     lng: longitude
+    //   });
+    // };
+
+    // function error() {
+    //   console.log("Unable to retrieve your location");
+    // }
+    // navigator.geolocation.getCurrentPosition(success, error);
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url =
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=31.5204,74.3587&radius=1500&type=restaurant&key=AIzaSyC0FOtX3YbEpBiN5tqyVJQDvQaDJzA-N3g";
+      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.6844,73.0479&radius=1500&type=restaurant&key=AIzaSyC0FOtX3YbEpBiN5tqyVJQDvQaDJzA-N3g";
 
     fetch(proxyurl + url)
       .then(res => res.json())
       .then(
         result => {
-          this.setState({
-            isLoaded: true,
-            resturantsList: result.results
-          });
           console.log(result.results);
+
+          let allResturants = this.state.resturantsList.concat(
+            ...result.results
+          );
+          this.setState({
+            resturantsList: allResturants
+          });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -48,7 +71,34 @@ class Location extends React.Component {
         }
       );
   }
+
+  handleFilter(e) {
+    this.setState({
+      filter: {
+        rating: e.target.value,
+        searchText: this.state.filter.searchText
+      }
+    });
+  }
+  handleInput(e) {
+    this.setState({
+      filter: {
+        rating: this.state.filter.rating,
+        searchText: e.target.value
+      }
+    });
+  }
+
   render() {
+    // Filter function
+    const filteredResturants = this.state.resturantsList.filter(resturant => {
+      const filterExpression =
+        resturant.name
+          .toLowerCase()
+          .includes(this.state.filter.searchText.toLowerCase()) &&
+        resturant.rating >= this.state.filter.rating;
+      return filterExpression;
+    });
     return (
       <div className="container">
         <div className="map">
@@ -60,11 +110,15 @@ class Location extends React.Component {
             mapElement={<div style={{ height: `100%` }} />}
             lat={this.state.lat}
             lng={this.state.lng}
-            markers={this.state.resturantsList}
+            markers={filteredResturants}
           />
         </div>
         <div style={{ width: "30%" }} className="resturantList">
-          <ResturantsList resturants={this.state.resturantsList} />
+          <div className="filterBar">
+            <SearchInput handleInput={this.handleInput} />
+            <Filter handleFilter={this.handleFilter} />
+          </div>
+          <ResturantsList resturants={filteredResturants} />
         </div>
       </div>
     );

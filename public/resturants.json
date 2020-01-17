@@ -1,0 +1,90 @@
+[
+  {
+    "geometry": {
+      "location": {
+        "lat": 33.69524,
+        "lng": 73.0441139
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 33.6865409802915,
+          "lng": 73.0454968802915
+        },
+        "southwest": {
+          "lat": 33.6838430197085,
+          "lng": 73.04279891970849
+        }
+      }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+    "id": "4e87d1307822668bb6c993a636eacb5ce",
+    "name": "Bella Pizza",
+    "opening_hours": {
+      "open_now": true
+    },
+    "place_id": "ChIJg1Y0rtO_3zgRpFkpqcryrlI",
+    "plus_code": {
+      "compound_code": "M2PV+3J Islamabad, Pakistan",
+      "global_code": "8J5MM2PV+3J"
+    },
+    "rating": 3.3,
+    "reference": "ChIJg1Y0rtO_3zgRpFkpqcryrlI",
+    "scope": "GOOGLE",
+    "types": [
+      "meal_delivery",
+      "meal_takeaway",
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "user_ratings_total": 4,
+    "vicinity": "Street 54, Islamabad"
+  },
+  {
+    "geometry": {
+      "location": {
+        "lat": 33.6970905,
+        "lng": 73.03512119999999
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 33.6884804802915,
+          "lng": 73.0363722802915
+        },
+        "southwest": {
+          "lat": 33.6857825197085,
+          "lng": 73.0336743197085
+        }
+      }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+    "id": "7c38c167a15d182bf89292e181a7158589",
+    "name": "Chilman Restaurant",
+    "opening_hours": {
+      "open_now": true
+    },
+    "photos": [
+      {
+        "height": 2988,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/118047813215206551743\">farhan hassan</a>"
+        ],
+        "photo_reference": "CmRaAAAA_eHYHJ72hbZbJvXbdCWywRFMLx2OE_jg36d67fGsUr3WnD__kX4IHGy9uUFBC3vTj6N1QPJ-rVv_8D4xHy-6PTj_rIoeaaPaW7-TxvUqY-NwYxoBf_4s82VZy85Z6R4LEhDRbptcuhTXLpRUP27ivsWKGhR4Qa7KiqPCjIT5J3rtvaRMBzS-xw",
+        "width": 5312
+      }
+    ],
+    "place_id": "ChIJmYBA-C2-3zgRy9w0iO7F3vg",
+    "plus_code": {
+      "compound_code": "M2PP+R2 Islamabad, Pakistan",
+      "global_code": "8J5MM2PP+R2"
+    },
+    "price_level": 2,
+    "rating": 4.2,
+    "reference": "ChIJmYBA-C2-3zgRy9w0iO7F3vg",
+    "scope": "GOOGLE",
+    "types": ["restaurant", "food", "point_of_interest", "establishment"],
+    "user_ratings_total": 1721,
+    "vicinity": "Ramzan Plaza, Mangla Road, Islamabad"
+  }
+]

@@ -18,6 +18,7 @@ body {
 }
 .resturant {
   padding: 1rem;
+  cursor: pointer;
 }
 .resturant:nth-child(odd) {
   background-color: #f3f3f3;
@@ -36,4 +37,30 @@ body {
 .resturant__row {
   display: flex;
   justify-content: space-between;
+}
+
+/* Search input box */
+.search__container {
+  padding: 1rem 0;
+  flex-grow: 2;
+}
+.serach__inputBox {
+  padding: 1rem 0.5rem;
+  border-radius: 25px;
+  border: 1px solid black;
+  width: 90%;
+}
+.serach__inputBox:focus {
+  border: 1px solid black;
+}
+.filterBar {
+  display: flex;
+  align-items: center;
+}
+.filter__container {
+  flex-grow: 1;
+}
+select {
+  padding: 0.5rem;
+  width: 100%;
 }

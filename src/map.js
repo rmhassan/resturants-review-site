@@ -13,6 +13,7 @@ const MyMapComponent = withScriptjs(
       defaultZoom={8}
       defaultCenter={{ lat: props.lat, lng: props.lng }}
     >
+      {console.log(props.lat, props.lng)}
       {props.isMarkerShown && (
         <Marker position={{ lat: props.lat, lng: props.lng }} />
       )}
