@@ -44,7 +44,7 @@ class Location extends React.Component {
     // navigator.geolocation.getCurrentPosition(success, error);
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url =
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.6844,73.0479&radius=1500&type=restaurant&key=AIzaSyC0FOtX3YbEpBiN5tqyVJQDvQaDJzA-N3g";
+      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.6844,73.0479&radius=1500&type=restaurant&key=api_key";
 
     fetch(proxyurl + url)
       .then(res => res.json())
@@ -104,7 +104,7 @@ class Location extends React.Component {
         <div className="map">
           <Map
             isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDmYOV6jyCwchqURbvPOnD5v7NoxUIR4r4"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=api_key"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `95vh` }} />}
             mapElement={<div style={{ height: `100%` }} />}
